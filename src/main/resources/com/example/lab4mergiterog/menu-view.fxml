@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" spacing="15.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab4mergiterog.controllers.MenuController">
+   <children>
+      <Button mnemonicParsing="false" text="Add user" />
+      <Button fx:id="buttonDeleteUser" mnemonicParsing="false" onAction="#onDeleteUserButton" text="Delete user" />
+      <Button fx:id="buttonAddFriendship" mnemonicParsing="false" onAction="#onAddFriendshipButton" text="Add friendship" />
+      <Button fx:id="buttonDeleteFriendship" mnemonicParsing="false" onAction="#onDeleteFriendshipButton" text="Delete friendship" />
+      <Button fx:id="buttonShowUsers" mnemonicParsing="false" onAction="#onShowUsersButton" text="Show users" />
+      <Button fx:id="buttonShowFriendships" mnemonicParsing="false" onAction="#onShowFriendshipsButton" text="Show friendships" />
+      <Button fx:id="buttonExit" mnemonicParsing="false" onAction="#onExitButton" text="Exit" />
+   </children>
+</VBox>
