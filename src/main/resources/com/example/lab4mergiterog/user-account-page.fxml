@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab4mergiterog.controllers.UserAccountController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="75.0" prefWidth="700.0" spacing="150.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="250.0" spacing="5.0">
+               <children>
+                  <ImageView fitHeight="40.0" fitWidth="100.0">
+                     <image>
+                        <Image url="@../../../images/logo.jpg" />
+                     </image>
+                  </ImageView>
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="150.0">
+                     <children>
+                        <Label text="Profile: " />
+                        <Label fx:id="labelUserName" style="-fx-font-weight: bold;" />
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="245.0" spacing="15.0">
+               <children>
+                  <Button fx:id="buttonShowAllUsers" mnemonicParsing="false" text="All users" />
+                  <Button fx:id="buttonShowAllFriends" mnemonicParsing="false" text="Friends" />
+                  <Button fx:id="buttonShowRequests" mnemonicParsing="false" text="Friend requests" />
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>

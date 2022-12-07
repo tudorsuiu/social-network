@@ -33,6 +33,13 @@ public class LogInController {
             System.out.println(loggedUser);
             textFieldLogInEmail.clear();
             passwordFieldLogInPassword.clear();
+            labelLogInErrors.setText("");
+            FXMLLoader userAccountPage = new FXMLLoader(Application.class.getResource("user-account-page.fxml"));
+            Scene scene = new Scene(userAccountPage.load());
+            Stage stage = new Stage();
+            stage.setTitle("Profile: " + loggedUser.getFirstName() + " " + loggedUser.getLastName());
+            stage.setScene(scene);
+            stage.show();
         }
         catch (Exception e) {
             labelLogInErrors.setText(e.getMessage());
