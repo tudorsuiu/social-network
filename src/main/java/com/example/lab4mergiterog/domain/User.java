@@ -1,8 +1,11 @@
 package com.example.lab4mergiterog.domain;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class User extends Entity {
     private String firstName;
-    private String lastName;
+    private String  lastName;
     private Integer age;
     private String email;
     private String password;
@@ -25,12 +28,20 @@ public class User extends Entity {
         this.password = password;
     }
 
+    public User(String firstName, String lastName, Integer age, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
+        this.email = email;
+        this.password = password;
+    }
+
     /**
      * Copy-constructor
      * @param user User - new User object
      */
     public User(User user) {
-        super(user.id);
+        super(user.getId());
         this.firstName = user.firstName;
         this.lastName = user.lastName;
         this.age = user.age;

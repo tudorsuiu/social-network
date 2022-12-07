@@ -10,5 +10,6 @@ module com.example.lab4mergiterog {
     opens com.example.lab4mergiterog to javafx.fxml;
     exports com.example.lab4mergiterog;
     exports com.example.lab4mergiterog.controllers;
+    exports com.example.lab4mergiterog.domain;
     opens com.example.lab4mergiterog.controllers to javafx.fxml;
 }

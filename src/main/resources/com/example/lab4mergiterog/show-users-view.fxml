@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" spacing="12.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab4mergiterog.controllers.UserController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" spacing="10.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab4mergiterog.controllers.UserController">
    <children>
-      <TableView fx:id="tableViewShowUsers" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="700.0">
+      <TableView fx:id="tableViewShowUsers" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="700.0">
          <columns>
             <TableColumn fx:id="tableColumnUserId" prefWidth="116.666666667" text="ID" />
             <TableColumn fx:id="tableColumnUserFirstName" prefWidth="116.666666667" text="First Name" />
@@ -18,10 +21,16 @@
             <TableColumn fx:id="tableColumnUserPassword" prefWidth="116.666666667" text="Password" />
          </columns>
       </TableView>
-      <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
+      <Label fx:id="labelConfirmation" />
+      <HBox alignment="CENTER" prefHeight="26.0" prefWidth="200.0" spacing="10.0">
          <children>
+            <TextField fx:id="textFieldFirstName" alignment="CENTER" prefHeight="26.0" prefWidth="70.0" promptText="First name" />
+            <TextField fx:id="textFieldLastName" alignment="CENTER" prefHeight="26.0" prefWidth="70.0" promptText="Last name" />
+            <TextField fx:id="textFieldAge" alignment="CENTER" prefHeight="26.0" prefWidth="70.0" promptText="Age" />
+            <TextField fx:id="textFieldEmail" alignment="CENTER" prefHeight="26.0" prefWidth="150.0" promptText="Email" />
+            <PasswordField fx:id="passwordFieldPassword" alignment="CENTER" prefWidth="80.0" promptText="Password" />
             <Button fx:id="buttonAddUser" mnemonicParsing="false" onAction="#onAddUserButton" text="Add" />
-            <Button fx:id="buttonDeleteUser" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="buttonDeleteUser" mnemonicParsing="false" onAction="#onDeleteUserButton" text="Delete" />
          </children>
       </HBox>
    </children>

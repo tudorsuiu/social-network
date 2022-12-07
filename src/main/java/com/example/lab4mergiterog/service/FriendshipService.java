@@ -2,12 +2,16 @@ package com.example.lab4mergiterog.service;
 
 import com.example.lab4mergiterog.domain.Friendship;
 import com.example.lab4mergiterog.domain.validators.FriendshipValidator;
+import com.example.lab4mergiterog.domain.validators.ValidationException;
 import com.example.lab4mergiterog.domain.validators.Validator;
 import com.example.lab4mergiterog.repository.FriendshipRepository;
 import com.example.lab4mergiterog.repository.Repository;
+import com.example.lab4mergiterog.repository.dbrepository.FriendshipRepositoryDB;
+import com.example.lab4mergiterog.repository.dbrepository.UserRepositoryDB;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class FriendshipService{
     Validator<Friendship> validator;
@@ -25,12 +29,37 @@ public class FriendshipService{
     }
 
     /**
+     * Generates the id for the next entity
+     * @return Integer - id
+     */
+    public Integer idGenerator() {
+        if(FriendshipRepositoryDB.getInstance().read().size() == 0) {
+            return 1;
+        }
+        else {
+            return FriendshipRepositoryDB.getInstance().read().get(FriendshipRepositoryDB.getInstance().read().size() - 1).getId() + 1;
+        }
+    }
+
+    /**
      * Validates and creates an entity
      * @param entity E - entity
      */
     public void create(Friendship entity) {
+        entity.setId(idGenerator());
+        for(Friendship f : FriendshipService.getInstance().read()) {
+            if(Objects.equals(f.getId(), entity.getId())) {
+                throw new ValidationException("A friendship with this ID already exists.");
+            }
+            if((Objects.equals(entity.getFirstUserId(), f.getFirstUserId()) &&
+                    Objects.equals(entity.getSecondUserId(), f.getSecondUserId())) ||
+                    (Objects.equals(entity.getFirstUserId(), f.getSecondUserId()) &&
+                            Objects.equals(entity.getSecondUserId(), f.getFirstUserId()))) {
+                throw new ValidationException("A friendship relation between these 2 users already exist.");
+            }
+        }
         validator.validate(entity);
-        FriendshipRepository.getInstance().create(entity);
+        FriendshipRepositoryDB.getInstance().create(entity);
     }
 
     /**
@@ -38,7 +67,7 @@ public class FriendshipService{
      * @return List<E> - all entities from repository
      */
     public List<Friendship> read() {
-        return FriendshipRepository.getInstance().read();
+        return FriendshipRepositoryDB.getInstance().read();
     }
 
     /**
@@ -47,7 +76,7 @@ public class FriendshipService{
      * @return E - entity with given index
      */
     public Friendship read(int index) {
-        return FriendshipRepository.getInstance().read(index);
+        return FriendshipRepositoryDB.getInstance().read(index);
     }
 
     /**
@@ -57,7 +86,7 @@ public class FriendshipService{
      */
     public void update(Friendship oldEntity, Friendship newEntity) {
         validator.validate(newEntity);
-        FriendshipRepository.getInstance().update(oldEntity, newEntity);
+        FriendshipRepositoryDB.getInstance().update(oldEntity, newEntity);
     }
 
     /**
@@ -65,7 +94,7 @@ public class FriendshipService{
      * @param entity E - entity to be deleted
      */
     public void delete(Friendship entity) {
-        FriendshipRepository.getInstance().delete(entity);
+        FriendshipRepositoryDB.getInstance().delete(entity);
     }
 
     /**
@@ -74,7 +103,7 @@ public class FriendshipService{
      * @return Friendship - object
      */
     public Friendship getFriendshipById(int id) {
-        for(Friendship f : FriendshipRepository.getInstance().read()) {
+        for(Friendship f : FriendshipRepositoryDB.getInstance().read()) {
             if(f.getId() == id) {
                 return f;
             }

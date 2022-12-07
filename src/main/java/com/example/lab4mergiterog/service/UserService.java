@@ -3,9 +3,10 @@ package com.example.lab4mergiterog.service;
 import com.example.lab4mergiterog.domain.Friendship;
 import com.example.lab4mergiterog.domain.User;
 import com.example.lab4mergiterog.domain.validators.UserValidator;
+import com.example.lab4mergiterog.domain.validators.ValidationException;
 import com.example.lab4mergiterog.domain.validators.Validator;
 import com.example.lab4mergiterog.repository.Repository;
-import com.example.lab4mergiterog.repository.UserRepository;
+import com.example.lab4mergiterog.repository.dbrepository.UserRepositoryDB;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -27,12 +28,34 @@ public class UserService {
     }
 
     /**
+     * Generates the id for the next entity
+     * @return Integer - id
+     */
+    public Integer idGenerator() {
+        if(UserRepositoryDB.getInstance().read().size() == 0) {
+            return 1;
+        }
+        else {
+            return UserRepositoryDB.getInstance().read().get(UserRepositoryDB.getInstance().read().size() - 1).getId() + 1;
+        }
+    }
+
+    /**
      * Validates and creates an entity
      * @param entity E - entity
      */
     public void create(User entity) {
+        entity.setId(idGenerator());
+        for(User u : UserService.getInstance().read()) {
+            if(Objects.equals(u.getId(), entity.getId())) {
+                throw new ValidationException("An user with this ID already exists.");
+            }
+            if(Objects.equals(u.getEmail(), entity.getEmail())) {
+                throw new ValidationException("There is already an account with this email address.");
+            }
+        }
         validator.validate(entity);
-        UserRepository.getInstance().create(entity);
+        UserRepositoryDB.getInstance().create(entity);
     }
 
     /**
@@ -40,7 +63,7 @@ public class UserService {
      * @return List<E> - all entities from repository
      */
     public List<User> read() {
-        return UserRepository.getInstance().read();
+        return UserRepositoryDB.getInstance().read();
     }
 
     /**
@@ -49,7 +72,7 @@ public class UserService {
      * @return E - entity with given index
      */
     public User read(int index) {
-        return UserRepository.getInstance().read(index);
+        return UserRepositoryDB.getInstance().read(index);
     }
 
     /**
@@ -59,7 +82,7 @@ public class UserService {
      */
     public void update(User oldEntity, User newEntity) {
         validator.validate(newEntity);
-        UserRepository.getInstance().update(oldEntity, newEntity);
+        UserRepositoryDB.getInstance().update(oldEntity, newEntity);
     }
 
     /**
@@ -69,12 +92,12 @@ public class UserService {
     public void delete(User entity) {
         for(int i = 0; i < FriendshipService.getInstance().read().size(); i++) {
             Friendship friendship = FriendshipService.getInstance().read().get(i);
-            if(Objects.equals(friendship.getFirstUserID(), entity.getId()) || Objects.equals(friendship.getSecondUserID(), entity.getId())) {
+            if(Objects.equals(friendship.getFirstUserId(), entity.getId()) || Objects.equals(friendship.getSecondUserId(), entity.getId())) {
                 i--;
                 FriendshipService.getInstance().delete(friendship);
             }
         }
-        UserRepository.getInstance().delete(entity);
+        UserRepositoryDB.getInstance().delete(entity);
     }
 
     /**
@@ -83,11 +106,20 @@ public class UserService {
      * @return the user from repository that has the id equal to given id
      */
     public User getUserById(int id) {
-        for(User u : UserRepository.getInstance().read()) {
+        for(User u : UserRepositoryDB.getInstance().read()) {
             if(u.getId() == id) {
                 return u;
             }
         }
         throw new NoSuchElementException();
+    }
+
+    public User verifyEmailAndPassword(String email, String password) {
+        for(User u : UserService.getInstance().read()) {
+            if(Objects.equals(u.getEmail(), email) && Objects.equals(u.getPassword(), password)) {
+                return u;
+            }
+        }
+        throw new ValidationException("An account with these credentials doesn't exist.");
     }
 }

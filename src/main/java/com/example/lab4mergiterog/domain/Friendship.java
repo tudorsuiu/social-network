@@ -1,37 +1,44 @@
 package com.example.lab4mergiterog.domain;
 
 public class Friendship extends Entity {
-    private Integer firstUserID;
-    private Integer secondUserID;
+    private Integer firstUserId;
+    private Integer secondUserId;
+
+//    private String status;
 
     public Friendship(Integer id, Integer firstUserID, Integer secondUserID) {
         super(id);
-        this.firstUserID = firstUserID;
-        this.secondUserID = secondUserID;
+        this.firstUserId = firstUserID;
+        this.secondUserId = secondUserID;
     }
 
-    public Integer getFirstUserID() {
-        return firstUserID;
+    public Friendship(Integer firstUserID, Integer secondUserID) {
+        this.firstUserId = firstUserID;
+        this.secondUserId = secondUserID;
+    }
+
+    public Integer getFirstUserId() {
+        return firstUserId;
     }
 
     public void setFirstUserID(Integer firstUserID) {
-        this.firstUserID = firstUserID;
+        this.firstUserId = firstUserID;
     }
 
-    public Integer getSecondUserID() {
-        return secondUserID;
+    public Integer getSecondUserId() {
+        return secondUserId;
     }
 
     public void setSecondUserID(Integer secondUserID) {
-        this.secondUserID = secondUserID;
+        this.secondUserId = secondUserID;
     }
 
     @Override
     public String toString() {
         return "Friendship{" +
                 "id=" + id +
-                ", firstUserID=" + firstUserID +
-                ", secondUserID=" + secondUserID +
+                ", firstUserID=" + firstUserId +
+                ", secondUserID=" + secondUserId +
                 '}';
     }
 }

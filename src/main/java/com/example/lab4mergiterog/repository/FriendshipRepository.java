@@ -19,6 +19,7 @@ public class FriendshipRepository implements Repository<Friendship> {
         }
         return instance;
     }
+
     @Override
     public void create(Friendship entity) {
         entities.add(entity);
