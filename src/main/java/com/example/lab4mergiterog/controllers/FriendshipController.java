@@ -29,15 +29,13 @@ public class FriendshipController implements Initializable {
 
     @FXML
     protected void onAddFriendshipButton(ActionEvent actionEvent) {
-//        int id = Integer.parseInt(textFieldFriendshipId.getText());
-        int firstUserId = Integer.parseInt(textFieldFriendshipFirstUserId.getText());
-        int secondUserId = Integer.parseInt(textFieldFriendshipSecondUserId.getText());
-        Friendship friendship = new Friendship(firstUserId, secondUserId);
-        FriendshipService.getInstance().create(friendship);
-//        textFieldFriendshipId.clear();
-        textFieldFriendshipFirstUserId.clear();
-        textFieldFriendshipSecondUserId.clear();
-        tableViewShowFriendships.getItems().add(FriendshipService.getInstance().read().get(FriendshipService.getInstance().read().size() - 1));
+//        int firstUserId = Integer.parseInt(textFieldFriendshipFirstUserId.getText());
+//        int secondUserId = Integer.parseInt(textFieldFriendshipSecondUserId.getText());
+//        Friendship friendship = new Friendship(firstUserId, secondUserId);
+//        FriendshipService.getInstance().create(friendship);
+//        textFieldFriendshipFirstUserId.clear();
+//        textFieldFriendshipSecondUserId.clear();
+//        tableViewShowFriendships.getItems().add(FriendshipService.getInstance().read().get(FriendshipService.getInstance().read().size() - 1));
     }
 
     @FXML
@@ -51,18 +49,18 @@ public class FriendshipController implements Initializable {
 
     @FXML
     protected void onDeleteFriendshipButton(ActionEvent actionEvent) {
-        Friendship friendship = tableViewShowFriendships.getSelectionModel().getSelectedItem();
-        FriendshipService.getInstance().delete(friendship);
-        tableViewShowFriendships.getItems().remove(friendship);
+//        Friendship friendship = tableViewShowFriendships.getSelectionModel().getSelectedItem();
+//        FriendshipService.getInstance().delete(friendship);
+//        tableViewShowFriendships.getItems().remove(friendship);
     }
 
-    ObservableList<Friendship> model = FXCollections.observableArrayList(FriendshipService.getInstance().read());
+//    ObservableList<Friendship> model = FXCollections.observableArrayList(FriendshipService.getInstance().read());
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tableColumnFriendshipId.setCellValueFactory(new PropertyValueFactory<Friendship, Integer>("id"));
-        tableColumnFriendshipFirstUserId.setCellValueFactory(new PropertyValueFactory<Friendship, Integer>("FirstUserId"));
-        tableColumnFriendshipSecondUserId.setCellValueFactory(new PropertyValueFactory<Friendship, Integer>("SecondUserId"));
-        tableViewShowFriendships.setItems(model);
+//        tableColumnFriendshipId.setCellValueFactory(new PropertyValueFactory<Friendship, Integer>("id"));
+//        tableColumnFriendshipFirstUserId.setCellValueFactory(new PropertyValueFactory<Friendship, Integer>("FirstUserId"));
+//        tableColumnFriendshipSecondUserId.setCellValueFactory(new PropertyValueFactory<Friendship, Integer>("SecondUserId"));
+//        tableViewShowFriendships.setItems(model);
     }
 }

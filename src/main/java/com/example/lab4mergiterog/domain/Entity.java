@@ -2,6 +2,8 @@ package com.example.lab4mergiterog.domain;
 
 import javafx.beans.property.SimpleIntegerProperty;
 
+import java.util.Objects;
+
 public class Entity {
     protected Integer id;
 

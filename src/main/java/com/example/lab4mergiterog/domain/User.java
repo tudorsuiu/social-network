@@ -3,6 +3,8 @@ package com.example.lab4mergiterog.domain;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
+import java.util.Objects;
+
 public class User extends Entity {
     private String firstName;
     private String  lastName;

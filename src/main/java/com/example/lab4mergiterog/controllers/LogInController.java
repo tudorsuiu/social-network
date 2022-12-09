@@ -1,6 +1,7 @@
 package com.example.lab4mergiterog.controllers;
 
 import com.example.lab4mergiterog.Application;
+import com.example.lab4mergiterog.domain.CurrentUser;
 import com.example.lab4mergiterog.domain.User;
 import com.example.lab4mergiterog.service.UserService;
 import javafx.fxml.FXML;
@@ -30,14 +31,14 @@ public class LogInController {
             String email = textFieldLogInEmail.getText();
             String password = passwordFieldLogInPassword.getText();
             User loggedUser = UserService.getInstance().verifyEmailAndPassword(email, password);
-            System.out.println(loggedUser);
+            CurrentUser.getInstance().setUser(loggedUser);
             textFieldLogInEmail.clear();
             passwordFieldLogInPassword.clear();
             labelLogInErrors.setText("");
             FXMLLoader userAccountPage = new FXMLLoader(Application.class.getResource("user-account-page.fxml"));
             Scene scene = new Scene(userAccountPage.load());
             Stage stage = new Stage();
-            stage.setTitle("Profile: " + loggedUser.getFirstName() + " " + loggedUser.getLastName());
+            stage.setTitle("Profile");
             stage.setScene(scene);
             stage.show();
         }

@@ -110,4 +110,15 @@ public class FriendshipService{
         }
         throw new NoSuchElementException();
     }
+
+    public Friendship getFriendshipByIdsAndStatus(Integer firstUserId, Integer secondUserId, String status) {
+        for(Friendship f : FriendshipRepositoryDB.getInstance().read()) {
+            if(Objects.equals(f.getFirstUserId(), firstUserId) &&
+                    Objects.equals(f.getSecondUserId(), secondUserId) &&
+                    Objects.equals(f.getStatus(), status)) {
+                return f;
+            }
+        }
+        throw new ValidationException("Nu a fost gasita o prietenie cu aceste atribute!");
+    }
 }
