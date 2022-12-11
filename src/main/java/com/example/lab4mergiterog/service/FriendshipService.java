@@ -33,12 +33,19 @@ public class FriendshipService{
      * @return Integer - id
      */
     public Integer idGenerator() {
+        Integer maxim = 0;
         if(FriendshipRepositoryDB.getInstance().read().size() == 0) {
             return 1;
         }
         else {
-            return FriendshipRepositoryDB.getInstance().read().get(FriendshipRepositoryDB.getInstance().read().size() - 1).getId() + 1;
+            List<Friendship> friendships = FriendshipRepositoryDB.getInstance().read();
+            for(Friendship f : friendships) {
+                if(f.getId() > maxim) {
+                    maxim = f.getId();
+                }
+            }
         }
+        return maxim + 1;
     }
 
     /**
@@ -52,10 +59,29 @@ public class FriendshipService{
                 throw new ValidationException("A friendship with this ID already exists.");
             }
             if((Objects.equals(entity.getFirstUserId(), f.getFirstUserId()) &&
-                    Objects.equals(entity.getSecondUserId(), f.getSecondUserId())) ||
-                    (Objects.equals(entity.getFirstUserId(), f.getSecondUserId()) &&
-                            Objects.equals(entity.getSecondUserId(), f.getFirstUserId()))) {
-                throw new ValidationException("A friendship relation between these 2 users already exist.");
+                    Objects.equals(entity.getSecondUserId(), f.getSecondUserId()))) {
+                if(Objects.equals(f.getStatus(), "accepted") && Objects.equals(entity.getStatus(), "accepted")) {
+                    throw new ValidationException("You are already friend with: " +
+                            UserService.getInstance().getUserById(entity.getSecondUserId()).getFirstName() + " " +
+                            UserService.getInstance().getUserById(entity.getSecondUserId()).getLastName() + "!");
+                }
+                if(Objects.equals(f.getStatus(), "pending") && Objects.equals(entity.getStatus(), "pending")) {
+                    throw new ValidationException("A friend request is already sent. Wait for " +
+                            UserService.getInstance().getUserById(entity.getSecondUserId()).getFirstName() + " " +
+                            UserService.getInstance().getUserById(entity.getSecondUserId()).getLastName() + " to respond!");
+                }
+            }
+            else if((Objects.equals(entity.getFirstUserId(), f.getSecondUserId()) &&
+                    Objects.equals(entity.getSecondUserId(), f.getFirstUserId()))) {
+                if(Objects.equals(f.getStatus(), "accepted") && Objects.equals(entity.getStatus(), "accepted")) {
+                    throw new ValidationException("You are already friend with: " +
+                            UserService.getInstance().getUserById(entity.getSecondUserId()).getFirstName() + " " +
+                            UserService.getInstance().getUserById(entity.getSecondUserId()).getLastName() + "!");
+                }
+                if(Objects.equals(f.getStatus(), "pending") && Objects.equals(entity.getStatus(), "pending")) {
+                    throw new ValidationException("A friend request is already sent. " +
+                            "You can accept it by going into requests section!");
+                }
             }
         }
         validator.validate(entity);
@@ -119,6 +145,17 @@ public class FriendshipService{
                 return f;
             }
         }
-        throw new ValidationException("Nu a fost gasita o prietenie cu aceste atribute!");
+        throw new ValidationException("A friendship relation with these attributes was not found!");
+    }
+
+    public Friendship getFriendshipByIds(Integer firstUserId, Integer secondUserId) {
+        for(Friendship f : FriendshipRepositoryDB.getInstance().read()) {
+            if((Objects.equals(f.getFirstUserId(), firstUserId) &&
+                    Objects.equals(f.getSecondUserId(), secondUserId)) ||
+                    (f.getSecondUserId() == firstUserId && f.getFirstUserId() == secondUserId)) {
+                return f;
+            }
+        }
+        throw new ValidationException("A friendship relation between these two users was not found!");
     }
 }

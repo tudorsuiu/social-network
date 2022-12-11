@@ -32,12 +32,19 @@ public class UserService {
      * @return Integer - id
      */
     public Integer idGenerator() {
+        Integer maxim = 0;
         if(UserRepositoryDB.getInstance().read().size() == 0) {
             return 1;
         }
         else {
-            return UserRepositoryDB.getInstance().read().get(UserRepositoryDB.getInstance().read().size() - 1).getId() + 1;
+            List<User> users = UserRepositoryDB.getInstance().read();
+            for(User u : users) {
+                if(u.getId() > maxim) {
+                    maxim = u.getId();
+                }
+            }
         }
+        return maxim + 1;
     }
 
     /**

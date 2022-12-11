@@ -5,16 +5,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-padding: 15;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab4mergiterog.controllers.UserAccountController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="425.0" prefWidth="700.0" style="-fx-padding: 15;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab4mergiterog.controllers.UserAccountController">
    <children>
-      <VBox alignment="CENTER" layoutY="20.0" prefHeight="400.0" prefWidth="700.0" spacing="20.0">
+      <VBox alignment="CENTER" layoutY="13.0" prefHeight="400.0" prefWidth="700.0" spacing="20.0">
          <children>
-            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="450.0" spacing="5.0">
+            <HBox alignment="CENTER" prefHeight="20.0" prefWidth="450.0" spacing="5.0">
                <children>
                   <Label text="Welcome back,">
                      <font>
@@ -28,25 +29,36 @@
                   </Label>
                </children>
             </HBox>
-            <VBox alignment="TOP_CENTER" prefHeight="275.0" prefWidth="400.0" spacing="15.0">
+            <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="tableViewUsers" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="375.0">
-                    <columns>
-                      <TableColumn fx:id="tableColumnFirstName" prefWidth="75.0" text="First name" />
-                      <TableColumn fx:id="tableColumnLastName" prefWidth="75.0" text="Last name" />
-                        <TableColumn fx:id="tableColumnAge" prefWidth="75.0" text="Age" />
-                        <TableColumn fx:id="tableColumnEmail" prefWidth="150.0" text="Email" />
-                    </columns>
-                  </TableView>
-                  <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
+                  <TextField fx:id="textFieldSearchUser" promptText="Search user" />
+               </children>
+            </HBox>
+            <VBox alignment="TOP_CENTER" prefHeight="300.0" prefWidth="700.0">
+               <children>
+                  <Label fx:id="labelTableName" style="-fx-font-weight: bold;" />
+                  <VBox alignment="TOP_CENTER" prefHeight="275.0" prefWidth="400.0" spacing="15.0">
                      <children>
-                        <Button fx:id="buttonAddFriend" mnemonicParsing="false" onAction="#onAddFriendButton" prefWidth="90.0" text="Add friend" />
-                        <Button fx:id="buttonShowAllUsers" mnemonicParsing="false" onAction="#onButtonShowAllUsers" prefWidth="90.0" text="Show users" />
-                        <Button fx:id="buttonShowAllFriends" mnemonicParsing="false" onAction="#onButtonShowAllFriends" prefWidth="90.0" text="Show friends" />
-                        <Button fx:id="buttonShowAllRequests" mnemonicParsing="false" onAction="#onButtonShowAllRequests" prefWidth="90.0" text="Requests" />
-                        <Button fx:id="buttonAcceptRequest" mnemonicParsing="false" onAction="#onButtonAcceptRequest" prefWidth="90.0" text="Accept" />
+                        <TableView fx:id="tableViewUsers" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="200.0" prefWidth="375.0">
+                          <columns>
+                            <TableColumn fx:id="tableColumnFirstName" prefWidth="75.0" text="First name" />
+                            <TableColumn fx:id="tableColumnLastName" prefWidth="75.0" text="Last name" />
+                              <TableColumn fx:id="tableColumnAge" prefWidth="75.0" text="Age" />
+                              <TableColumn fx:id="tableColumnEmail" prefWidth="150.0" text="Email" />
+                          </columns>
+                        </TableView>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="10.0">
+                           <children>
+                              <Button fx:id="buttonAddFriend" mnemonicParsing="false" onAction="#onAddFriendButton" prefWidth="90.0" text="Add friend" />
+                              <Button fx:id="buttonShowAllFriends" mnemonicParsing="false" onAction="#onButtonShowAllFriends" prefWidth="90.0" text="Friends" />
+                              <Button fx:id="buttonShowAllRequests" mnemonicParsing="false" onAction="#onButtonShowAllRequests" prefWidth="90.0" text="Requests" />
+                              <Button fx:id="buttonAcceptRequest" mnemonicParsing="false" onAction="#onButtonAcceptRequest" prefWidth="90.0" text="Accept" />
+                              <Button fx:id="buttonDeleteFriend" mnemonicParsing="false" onAction="#onDeleteButton" prefWidth="90.0" text="Delete" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="labelErrors" />
                      </children>
-                  </HBox>
+                  </VBox>
                </children>
             </VBox>
          </children>
