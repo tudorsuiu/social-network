@@ -6,6 +6,7 @@ import com.example.lab4mergiterog.repository.FriendshipRepository;
 import com.example.lab4mergiterog.repository.Repository;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class FriendshipRepositoryDB implements Repository<Friendship> {
 
     @Override
     public void create(Friendship entity) {
-        String sql = "insert into friendships (id, first_user_id, second_user_id, status) values (?, ?, ?, ?)";
+        String sql = "insert into friendships (id, first_user_id, second_user_id, status, date) values (?, ?, ?, ?, ?)";
         try (Connection connection = DriverManager.getConnection(url, username, password);
              PreparedStatement ps = connection.prepareStatement(sql)) {
 
@@ -34,6 +35,7 @@ public class FriendshipRepositoryDB implements Repository<Friendship> {
             ps.setInt(2, entity.getFirstUserId());
             ps.setInt(3, entity.getSecondUserId());
             ps.setString(4, entity.getStatus());
+            ps.setDate(5, entity.getDate());
 
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -52,7 +54,8 @@ public class FriendshipRepositoryDB implements Repository<Friendship> {
                 Integer firstUserId = resultSet.getInt("first_user_id");
                 Integer secondUserId = resultSet.getInt("second_user_id");
                 String status = resultSet.getString("status");
-                Friendship friendship = new Friendship(id, firstUserId, secondUserId, status);
+                Date date = resultSet.getDate("date");
+                Friendship friendship = new Friendship(id, firstUserId, secondUserId, status, date);
                 friendships.add(friendship);
             }
             return friendships;

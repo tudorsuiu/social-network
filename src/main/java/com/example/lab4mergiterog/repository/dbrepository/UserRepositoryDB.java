@@ -77,7 +77,20 @@ public class UserRepositoryDB implements Repository<User> {
 
     @Override
     public void update(User oldEntity, User newEntity) {
-
+        String sql = "UPDATE users SET first_name = (?), last_name = (?), age = (?), email = (?), password = (?) WHERE id = (?)";
+        try(Connection connection = DriverManager.getConnection(url, username, password);
+        PreparedStatement ps = connection.prepareStatement(sql)) {
+            ps.setString(1,newEntity.getFirstName());
+            ps.setString(2,newEntity.getLastName());
+            ps.setInt(3,newEntity.getAge());
+            ps.setString(4,newEntity.getEmail());
+            ps.setString(5,newEntity.getPassword());
+            ps.setInt(6, oldEntity.getId());
+            ps.executeUpdate();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

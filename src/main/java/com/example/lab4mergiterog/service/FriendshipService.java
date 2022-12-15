@@ -1,6 +1,7 @@
 package com.example.lab4mergiterog.service;
 
 import com.example.lab4mergiterog.domain.Friendship;
+import com.example.lab4mergiterog.domain.User;
 import com.example.lab4mergiterog.domain.validators.FriendshipValidator;
 import com.example.lab4mergiterog.domain.validators.ValidationException;
 import com.example.lab4mergiterog.domain.validators.Validator;
@@ -9,6 +10,7 @@ import com.example.lab4mergiterog.repository.Repository;
 import com.example.lab4mergiterog.repository.dbrepository.FriendshipRepositoryDB;
 import com.example.lab4mergiterog.repository.dbrepository.UserRepositoryDB;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -157,5 +159,16 @@ public class FriendshipService{
             }
         }
         throw new ValidationException("A friendship relation between these two users was not found!");
+    }
+
+    public Date getDateByUsers(User loggedUser, User hoveredUser) {
+        List<Friendship> friendships = FriendshipService.getInstance().read();
+        for(Friendship f : friendships) {
+            if(Objects.equals(f.getFirstUserId(), loggedUser.getId()) && Objects.equals(f.getSecondUserId(), hoveredUser.getId()) ||
+                    Objects.equals(f.getSecondUserId(), loggedUser.getId()) && Objects.equals(f.getFirstUserId(), hoveredUser.getId())) {
+                return f.getDate();
+            }
+        }
+        throw new ValidationException("A date for the relationship between these two users was not found!");
     }
 }

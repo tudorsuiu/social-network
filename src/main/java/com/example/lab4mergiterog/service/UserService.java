@@ -1,5 +1,6 @@
 package com.example.lab4mergiterog.service;
 
+import com.example.lab4mergiterog.domain.CurrentUser;
 import com.example.lab4mergiterog.domain.Friendship;
 import com.example.lab4mergiterog.domain.User;
 import com.example.lab4mergiterog.domain.validators.UserValidator;
@@ -8,6 +9,7 @@ import com.example.lab4mergiterog.domain.validators.Validator;
 import com.example.lab4mergiterog.repository.Repository;
 import com.example.lab4mergiterog.repository.dbrepository.UserRepositoryDB;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -128,5 +130,20 @@ public class UserService {
             }
         }
         throw new ValidationException("An account with these credentials doesn't exist.");
+    }
+
+    public List<User> getFriends(User user) {
+        List<Friendship> friendships = FriendshipService.getInstance().read();
+        List<User> filtered = new ArrayList<>();
+        for (Friendship f : friendships) {
+            if (Objects.equals(user.getId(), f.getFirstUserId()) &&
+                    Objects.equals(f.getStatus(), "accepted")) {
+                filtered.add(UserService.getInstance().getUserById(f.getSecondUserId()));
+            } else if (Objects.equals(user.getId(), f.getSecondUserId()) &&
+                    Objects.equals(f.getStatus(), "accepted")) {
+                filtered.add(UserService.getInstance().getUserById(f.getFirstUserId()));
+            }
+        }
+        return filtered;
     }
 }

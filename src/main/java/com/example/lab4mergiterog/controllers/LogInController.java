@@ -4,8 +4,10 @@ import com.example.lab4mergiterog.Application;
 import com.example.lab4mergiterog.domain.CurrentUser;
 import com.example.lab4mergiterog.domain.User;
 import com.example.lab4mergiterog.service.UserService;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,7 +28,7 @@ public class LogInController {
     Label labelLogInErrors;
 
     @FXML
-    protected void verifyCredentials() {
+    protected void verifyCredentials(ActionEvent actionEvent) {
         try {
             String email = textFieldLogInEmail.getText();
             String password = passwordFieldLogInPassword.getText();
@@ -41,6 +43,7 @@ public class LogInController {
             stage.setTitle("Profile");
             stage.setScene(scene);
             stage.show();
+            ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
         }
         catch (Exception e) {
             labelLogInErrors.setText(e.getMessage());

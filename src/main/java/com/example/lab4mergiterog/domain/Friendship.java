@@ -1,22 +1,30 @@
 package com.example.lab4mergiterog.domain;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.sql.Date;
+
 public class Friendship extends Entity {
     private Integer firstUserId;
     private Integer secondUserId;
-
     private String status;
+    private Date date;
 
-    public Friendship(Integer id, Integer firstUserID, Integer secondUserID, String status) {
+
+    public Friendship(Integer id, Integer firstUserID, Integer secondUserID, String status, Date date) {
         super(id);
         this.firstUserId = firstUserID;
         this.secondUserId = secondUserID;
         this.status = status;
+        this.date = date;
     }
 
     public Friendship(Integer firstUserID, Integer secondUserID, String status) {
         this.firstUserId = firstUserID;
         this.secondUserId = secondUserID;
         this.status = status;
+        this.date = new Date(System.currentTimeMillis());
     }
 
     public Friendship(Friendship friendship) {
@@ -24,6 +32,7 @@ public class Friendship extends Entity {
         this.firstUserId = friendship.getFirstUserId();
         this.secondUserId = friendship.getSecondUserId();
         this.status = friendship.getStatus();
+        this.date = friendship.getDate();
     }
 
     public Integer getFirstUserId() {
@@ -46,6 +55,10 @@ public class Friendship extends Entity {
 
     public void setStatus(String status) { this.status = status; }
 
+    public Date getDate() { return date; }
+
+    public void setDate(Date date) { this.date = date; }
+
     @Override
     public String toString() {
         return "Friendship{" +
@@ -53,6 +66,7 @@ public class Friendship extends Entity {
                 ", firstUserID=" + firstUserId +
                 ", secondUserID=" + secondUserId +
                 ", status=" + status +
+                ", date=" + date +
                 '}';
     }
 }

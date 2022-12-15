@@ -1,5 +1,6 @@
 package com.example.lab4mergiterog.controllers;
 
+import com.example.lab4mergiterog.Application;
 import com.example.lab4mergiterog.domain.CurrentUser;
 import com.example.lab4mergiterog.domain.Friendship;
 import com.example.lab4mergiterog.domain.User;
@@ -7,13 +8,19 @@ import com.example.lab4mergiterog.service.FriendshipService;
 import com.example.lab4mergiterog.service.UserService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
 
 import java.net.URL;
+import java.sql.Date;
 import java.util.*;
 
 public class UserAccountController implements Initializable {
@@ -81,18 +88,7 @@ public class UserAccountController implements Initializable {
     protected void onButtonShowAllFriends() {
         try {
             labelTableName.setText("FRIEND LIST");
-            List<Friendship> friendships = FriendshipService.getInstance().read();
-            List<User> filtered = new ArrayList<>();
-            for (Friendship f : friendships) {
-                if (Objects.equals(loggedUser.getId(), f.getFirstUserId()) &&
-                        Objects.equals(f.getStatus(), "accepted")) {
-                    filtered.add(UserService.getInstance().getUserById(f.getSecondUserId()));
-                } else if (Objects.equals(loggedUser.getId(), f.getSecondUserId()) &&
-                        Objects.equals(f.getStatus(), "accepted")) {
-                    filtered.add(UserService.getInstance().getUserById(f.getFirstUserId()));
-                }
-            }
-            insertIntoTableView(filtered);
+            insertIntoTableView(UserService.getInstance().getFriends(loggedUser));
             labelErrors.setText("");
         }
         catch(Exception e) {
@@ -128,18 +124,7 @@ public class UserAccountController implements Initializable {
             newFriendship.setStatus("accepted");
             FriendshipService.getInstance().update(oldFriendship, newFriendship);
             labelTableName.setText("FRIEND LIST");
-            List<Friendship> friendships = FriendshipService.getInstance().read();
-            List<User> filtered = new ArrayList<>();
-            for (Friendship f : friendships) {
-                if (Objects.equals(loggedUser.getId(), f.getFirstUserId()) &&
-                        Objects.equals(f.getStatus(), "accepted")) {
-                    filtered.add(UserService.getInstance().getUserById(f.getSecondUserId()));
-                } else if (Objects.equals(loggedUser.getId(), f.getSecondUserId()) &&
-                        Objects.equals(f.getStatus(), "accepted")) {
-                    filtered.add(UserService.getInstance().getUserById(f.getFirstUserId()));
-                }
-            }
-            insertIntoTableView(filtered);
+            insertIntoTableView(UserService.getInstance().getFriends(loggedUser));
             labelErrors.setText("");
         }
         catch(Exception e) {
@@ -156,19 +141,26 @@ public class UserAccountController implements Initializable {
             List<Friendship> friendships = FriendshipService.getInstance().read();
             List<User> filtered = new ArrayList<>();
             labelTableName.setText("FRIEND LIST");
-            for (Friendship f : friendships) {
-                if (Objects.equals(loggedUser.getId(), f.getFirstUserId()) &&
-                        Objects.equals(f.getStatus(), "accepted")) {
-                    filtered.add(UserService.getInstance().getUserById(f.getSecondUserId()));
-                } else if (Objects.equals(loggedUser.getId(), f.getSecondUserId()) &&
-                        Objects.equals(f.getStatus(), "accepted")) {
-                    filtered.add(UserService.getInstance().getUserById(f.getFirstUserId()));
-                }
-            }
-            insertIntoTableView(filtered);
+            insertIntoTableView(UserService.getInstance().getFriends(loggedUser));
             labelErrors.setText("");
         }
         catch(Exception e) {
+            labelErrors.setText(e.getMessage());
+        }
+    }
+
+    @FXML
+    protected void onButtonBack(ActionEvent actionEvent) {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader menuLoader = new FXMLLoader(Application.class.getResource("log-in-page.fxml"));
+            Scene scene = new Scene(menuLoader.load());
+            stage.setTitle("Log in");
+            stage.setScene(scene);
+            stage.show();
+            ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
+        }
+        catch (Exception e) {
             labelErrors.setText(e.getMessage());
         }
     }
@@ -211,6 +203,17 @@ public class UserAccountController implements Initializable {
         }
     }
 
+    @FXML
+    protected void onButtonShowDate() {
+        try {
+            User selectedUser = tableViewUsers.getSelectionModel().getSelectedItem();
+            Date since = FriendshipService.getInstance().getDateByUsers(loggedUser, selectedUser);
+            labelErrors.setText("You and " + selectedUser.getFirstName() + " " + selectedUser.getLastName() + " have been friends since " + since + ".");
+        }
+        catch (Exception e) {
+            labelErrors.setText(e.getMessage());
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         labelUserName.setText(loggedUser.getFirstName() + " " + loggedUser.getLastName());
@@ -222,18 +225,7 @@ public class UserAccountController implements Initializable {
             onEnter();
         }});
         labelTableName.setText("FRIEND LIST");
-        List<Friendship> friendships = FriendshipService.getInstance().read();
-        List<User> filtered = new ArrayList<>();
-        for (Friendship f : friendships) {
-            if (Objects.equals(loggedUser.getId(), f.getFirstUserId()) &&
-                    Objects.equals(f.getStatus(), "accepted")) {
-                filtered.add(UserService.getInstance().getUserById(f.getSecondUserId()));
-            } else if (Objects.equals(loggedUser.getId(), f.getSecondUserId()) &&
-                    Objects.equals(f.getStatus(), "accepted")) {
-                filtered.add(UserService.getInstance().getUserById(f.getFirstUserId()));
-            }
-        }
-        model = FXCollections.observableArrayList(filtered);
+        model = FXCollections.observableArrayList(UserService.getInstance().getFriends(loggedUser));
         tableViewUsers.setItems(model);
     }
 }

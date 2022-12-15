@@ -4,6 +4,7 @@ import com.example.lab4mergiterog.domain.User;
 import com.example.lab4mergiterog.service.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -40,6 +41,7 @@ public class CreateAccountController {
             textFieldEmail.clear();
             passwordFieldPassword.clear();
             labelErrors.setText("Account created successfully!");
+            ((Node)(actionEvent.getSource())).getScene().getWindow().hide();
         }
         catch (Exception e) {
             labelErrors.setText(e.getMessage());
