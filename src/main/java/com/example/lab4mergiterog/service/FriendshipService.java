@@ -62,7 +62,7 @@ public class FriendshipService{
             }
             if((Objects.equals(entity.getFirstUserId(), f.getFirstUserId()) &&
                     Objects.equals(entity.getSecondUserId(), f.getSecondUserId()))) {
-                if(Objects.equals(f.getStatus(), "accepted") && Objects.equals(entity.getStatus(), "accepted")) {
+                if(Objects.equals(f.getStatus(), "accepted")) {
                     throw new ValidationException("You are already friend with: " +
                             UserService.getInstance().getUserById(entity.getSecondUserId()).getFirstName() + " " +
                             UserService.getInstance().getUserById(entity.getSecondUserId()).getLastName() + "!");
@@ -75,7 +75,7 @@ public class FriendshipService{
             }
             else if((Objects.equals(entity.getFirstUserId(), f.getSecondUserId()) &&
                     Objects.equals(entity.getSecondUserId(), f.getFirstUserId()))) {
-                if(Objects.equals(f.getStatus(), "accepted") && Objects.equals(entity.getStatus(), "accepted")) {
+                if(Objects.equals(f.getStatus(), "accepted")) {
                     throw new ValidationException("You are already friend with: " +
                             UserService.getInstance().getUserById(entity.getSecondUserId()).getFirstName() + " " +
                             UserService.getInstance().getUserById(entity.getSecondUserId()).getLastName() + "!");
