@@ -44,7 +44,7 @@ Insert here
 
 <h2>Screenshots</h2>
 <br>
-![poza-1](https://user-images.githubusercontent.com/75640917/223334766-c386b7e4-40dc-4db9-a9ee-27163ef3c1ed.png)
+<img src="https://user-images.githubusercontent.com/75640917/223334766-c386b7e4-40dc-4db9-a9ee-27163ef3c1ed.png">
 <br>
 ![poza-2](https://user-images.githubusercontent.com/75640917/223334799-917b3100-9a44-4b6f-b84a-c298fef84bb7.png)
 <br>
