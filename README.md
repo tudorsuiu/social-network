@@ -12,10 +12,6 @@ This Social Network desktop app, made by a student using JavaFX, helps you conne
 - and 
 - concise
 
-If project has been improved after submission, here is a good place to specify it.
-
-Or use <a href="https://github.com/cesarferreira/dryrun" target="_blank">`dryrun`</a> by <a href="https://github.com/cesarferreira" target="_blank">@CesarFerreira</a>
-
 <h2>Contributing</h2>
 Mention pull requests. Link to an example and/or put it down here
 
