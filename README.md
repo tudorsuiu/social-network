@@ -3,7 +3,7 @@ Context and progress go here
 
 <h2>Goal and requirements</h2>
 
-The idea behind first implementation. What is expected, what should be included, what should not be included.
+This Social Network desktop app, made by a student using JavaFX, helps you connect with other users. You can create an account, add or delete friends, view your friends list, and see how long you've been friends with someone.
 
 <h2>Key learnings</h2>
 
