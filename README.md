@@ -1,9 +1,8 @@
 <h2>About</h2>
-Context and progress go here
+This Social Network desktop app, made by a student using JavaFX, helps you connect with other users. You can create an account, add or delete friends, view your friends list, and see how long you've been friends with someone.
+
 
 <h2>Goal and requirements</h2>
-
-This Social Network desktop app, made by a student using JavaFX, helps you connect with other users. You can create an account, add or delete friends, view your friends list, and see how long you've been friends with someone.
 
 <h2>Key learnings</h2>
 
