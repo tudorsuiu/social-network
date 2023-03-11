@@ -3,14 +3,22 @@ This Social Network desktop app, made by a student using JavaFX, helps you conne
 
 
 <h2>Functionalities</h2>
-[ x ] Functionality 1
-[ x ] Functionality 2
-[ x ] Functionality 3
+[x] Functionality 1
+<br>
+[x] Functionality 2
+<br>
+[x] Functionality 3
+<br>
 [x] Functionality 4
+<br>
 [x] Functionality 5
+<br>
 [x] Functionality 6
+<br>
 [x] Functionality 7
+<br>
 [x] Functionality 8
+<br>
 [x] Functionality 9
 
 <h2>Key learnings</h2>
