@@ -3,23 +3,17 @@ This Social Network desktop app, made by a student using JavaFX, helps you conne
 
 
 <h2>Functionalities</h2>
-- [x] Functionality 1
+✅ <strong>Account creation:</strong> <i>Users should be able to create an account with their personal information, such as name, email, age and password.</i>
 <br>
-- [x] Functionality 2
+✅ <strong>Friend requests:</strong> <i>Users can search for and send friend requests to other users. Once a friend request is accepted, the two users become friends.</i>
 <br>
-- [x] Functionality 3
+✅ <strong>Friend list:</strong> <i>Users can view a list of their current friends and their profiles. This list should include their friend's name, email and age.</i>
 <br>
-- [x] Functionality 4
+✅ <strong>Unfriend option:</strong> <i>Users can unfriend someone from their friend list.</i>
 <br>
-- [x] Functionality 5
+✅ <strong>Friendship duration:</strong> <i>By selecting a user from the list and pressing a button, the day you became friends will appear on the screen.</i>
 <br>
-- [x] Functionality 6
-<br>
-- [x] Functionality 7
-<br>
-- [x] Functionality 8
-<br>
-- [x] Functionality 9
+⬜ <strong>Messaging:</strong> <i>Users can send and receive private messages to their friends, either one-on-one or in a group chat. The messaging feature should support text and emojis.</i>
 
 <h2>Key learnings</h2>
 
