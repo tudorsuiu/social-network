@@ -2,7 +2,7 @@
 This Social Network desktop app, made by a student using JavaFX, helps you connect with other users. You can create an account, add or delete friends, view your friends list, and see how long you've been friends with someone.
 
 
-<h2>Goal and requirements</h2>
+<h2>Functionalities</h2>
 
 <h2>Key learnings</h2>
 
@@ -13,12 +13,6 @@ This Social Network desktop app, made by a student using JavaFX, helps you conne
 - concise
 
 If project has been improved after submission, here is a good place to specify it.
-
-<h2>Installation</h2>
-
-1. Download this project as zip and extract it
-2. Import it in Android Studio
-3. Sync Gradle and run on your device/emulator
 
 Or use <a href="https://github.com/cesarferreira/dryrun" target="_blank">`dryrun`</a> by <a href="https://github.com/cesarferreira" target="_blank">@CesarFerreira</a>
 
